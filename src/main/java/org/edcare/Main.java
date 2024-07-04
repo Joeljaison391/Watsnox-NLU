@@ -6,6 +6,7 @@ import com.ibm.watson.natural_language_understanding.v1.model.CategoriesResult;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.edcare.Services.WatsonNLUClassificationService;
 import org.edcare.Services.WatsonNLUConceptService;
+import org.edcare.Services.WatsonNLUEmotionService;
 import org.edcare.Services.WatsonNLUService;
 import org.edcare.util.BearerTokenGenerator;
 
@@ -45,6 +46,18 @@ public class Main {
             System.out.println("Concepts:");
             System.out.println("-----------");
             System.out.println(conceptResults);
+
+
+            WatsonNLUEmotionService nluEmotionService = new WatsonNLUEmotionService(NLUAPIKEY, NLUServiceUrl);
+            String analyzeStringEmotion = "Today started off well, but then things took a turn. " +
+                    "I feel happy about finishing my project, but sad that the weather ruined my plans.";
+
+            AnalysisResults emotionResults = nluEmotionService.analyzeEmotion(analyzeStringEmotion);
+
+            System.out.println("Emotion:");
+            System.out.println("-----------");
+            System.out.println(emotionResults);
+
 
 
 
