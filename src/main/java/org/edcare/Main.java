@@ -4,10 +4,7 @@ package org.edcare;
 import com.ibm.watson.natural_language_understanding.v1.model.AnalysisResults;
 import com.ibm.watson.natural_language_understanding.v1.model.CategoriesResult;
 import io.github.cdimascio.dotenv.Dotenv;
-import org.edcare.Services.WatsonNLUClassificationService;
-import org.edcare.Services.WatsonNLUConceptService;
-import org.edcare.Services.WatsonNLUEmotionService;
-import org.edcare.Services.WatsonNLUService;
+import org.edcare.Services.*;
 import org.edcare.util.BearerTokenGenerator;
 
 public class Main {
@@ -57,6 +54,14 @@ public class Main {
             System.out.println("Emotion:");
             System.out.println("-----------");
             System.out.println(emotionResults);
+
+            WatsonNLUEntityService nluEntityService = new WatsonNLUEntityService(NLUAPIKEY, NLUServiceUrl);
+            AnalysisResults entityResults = nluEntityService.analyzeEntities(AnalyzeString);
+
+            System.out.println("Entities:");
+            System.out.println("-----------");
+            System.out.println(entityResults);
+
 
 
 
