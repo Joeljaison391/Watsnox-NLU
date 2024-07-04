@@ -5,6 +5,7 @@ import com.ibm.watson.natural_language_understanding.v1.model.AnalysisResults;
 import com.ibm.watson.natural_language_understanding.v1.model.CategoriesResult;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.edcare.Services.WatsonNLUClassificationService;
+import org.edcare.Services.WatsonNLUConceptService;
 import org.edcare.Services.WatsonNLUService;
 import org.edcare.util.BearerTokenGenerator;
 
@@ -25,11 +26,6 @@ public class Main {
             WatsonNLUService nluService = new WatsonNLUService(NLUAPIKEY, NLUServiceUrl);
             AnalysisResults results = nluService.analyzeCategories(urlToAnalyze);
 
-//            System.out.println("Categories:");
-//            System.out.println("-----------");
-//            for (CategoriesResult category : results.getCategories()) {
-//                System.out.println(category.getScore() + " : " + category.getScore());
-//            }
 
             printDesiredResults(results);
 
@@ -41,6 +37,15 @@ public class Main {
             System.out.println("Classifications:");
             System.out.println("-----------");
             System.out.println(classificationResults);
+
+
+            WatsonNLUConceptService nluConceptService = new WatsonNLUConceptService(NLUAPIKEY, NLUServiceUrl);
+            AnalysisResults conceptResults = nluConceptService.analyzeConcepts(AnalyzeString);
+
+            System.out.println("Concepts:");
+            System.out.println("-----------");
+            System.out.println(conceptResults);
+
 
 
 
