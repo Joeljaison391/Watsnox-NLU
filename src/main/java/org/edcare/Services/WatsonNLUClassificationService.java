@@ -30,7 +30,7 @@ public class WatsonNLUClassificationService {
                 .build();
 
         AnalyzeOptions parameters = new AnalyzeOptions.Builder()
-                .text("The String to analyze goes here.")
+                .text(stringToAnalyze)
                 .features(features)
                 .build();
 
