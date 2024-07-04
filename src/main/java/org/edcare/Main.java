@@ -62,9 +62,12 @@ public class Main {
             System.out.println("-----------");
             System.out.println(entityResults);
 
+            WatsonNLUKeywordService nluKeywordService = new WatsonNLUKeywordService(NLUAPIKEY, NLUServiceUrl);
+            AnalysisResults keywordResults = nluKeywordService.analyzeKeywords(urlToAnalyze, 5, true, true);
 
-
-
+            System.out.println("Keywords:");
+            System.out.println("-----------");
+            System.out.println(keywordResults);
 
 
         } catch (Exception e) {
