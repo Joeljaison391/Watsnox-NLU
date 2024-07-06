@@ -7,6 +7,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.edcare.Services.*;
 import org.edcare.util.BearerTokenGenerator;
 
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
         try {
@@ -16,6 +18,14 @@ public class Main {
 
             String bearerToken = BearerTokenGenerator.generateBearerToken(APIKEY);
             System.out.println("Generated Bearer Token: " + bearerToken);
+
+            WatsonXAIService xaiService = new WatsonXAIService(bearerToken);
+            try {
+                xaiService.generateText();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
             String NLUServiceUrl = dotenv.get("NLU_SERVICE_URL");
             System.out.println("NLU Service URL: " + NLUServiceUrl);
@@ -46,8 +56,7 @@ public class Main {
 
 
             WatsonNLUEmotionService nluEmotionService = new WatsonNLUEmotionService(NLUAPIKEY, NLUServiceUrl);
-            String analyzeStringEmotion = "Today started off well, but then things took a turn. " +
-                    "I feel happy about finishing my project, but sad that the weather ruined my plans.";
+            String analyzeStringEmotion = "Today started off well, but then things took a turn. " + "I feel happy about finishing my project, but sad that the weather ruined my plans.";
 
             AnalysisResults emotionResults = nluEmotionService.analyzeEmotion(analyzeStringEmotion);
 
